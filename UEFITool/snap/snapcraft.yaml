@@ -1,0 +1,33 @@
+name: uefitool
+version: 'master-75225ec'
+summary: UEFI firmware image viewer and editor
+description: |
+  UEFITool is a cross-platform C++/Qt program for parsing, extracting and  
+  modifying UEFI firmware images.
+  It supports parsing of full BIOS images starting with the flash descriptor 
+  or any binary files containing UEFI volumes.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  UEFITool:
+    command: desktop-launch $SNAP/bin/uefitool
+    plugs:
+      - home
+      - unity7
+
+parts:
+  uefitool:
+    source: https://github.com/LongSoft/UEFITool.git
+    plugin: make
+    stage-packages:
+      - build-essential
+      - qt5-default
+    prepare: |
+      qmake uefitool.pro
+    artifacts:
+      - UEFITool
+    install: |
+      mv UEFITool $SNAPCRAFT_PART_INSTALL/bin/uefitool
+    after: [desktop-qt5]
