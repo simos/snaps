@@ -1,0 +1,26 @@
+name: hget
+version: '3.1.0'
+summary: Render websites in plain text from your terminal
+description: |
+  A CLI and an API to convert HTML into plain text. Can be used to fetch 
+  a site's HTML version and convert it into plain text, or 
+  to deliver plain text versions of your site dynamically.
+
+  You can also convert HTML into HTML, ignoring certain document elements, 
+  and starting at a root element other than <html>. You can choose 
+  to take raw Markdown output as well, 
+  instead of the default terminal-formatted plain text.
+
+grade: stable
+confinement: devmode
+
+apps:
+  hget:
+    command: hget
+    plugs: 
+      - network
+
+parts:
+  hget:
+    source: https://github.com/bevacqua/hget.git
+    plugin: nodejs
